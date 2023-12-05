@@ -1,5 +1,5 @@
 		#0x00.AirBnB clone - The console
-
+##Description
 This is a clone to the AirBnB web Application that has functionality resembling the well known AirBnB web Apllication
 
 ## Contents
@@ -8,7 +8,7 @@ This is a clone to the AirBnB web Application that has functionality resembling 
 [Description](#description)
 [Table of Contents] (#contents)
 [Installation] (#installation)
-[Usage](#usage)
+[Execution](#execution)
 [Testing](#Tests)
 [Authors](#Authors)
 
