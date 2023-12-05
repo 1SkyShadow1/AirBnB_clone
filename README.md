@@ -9,7 +9,7 @@ This is a clone to the AirBnB web Application that has functionality resembling 
 [Table of Contents] (#contents)
 [Installation] (#installation)
 [Execution](#execution)
-[Testing](#Tests)
+[Tests](#Tests)
 [Authors](#Authors)
 
 ## Installation
@@ -62,7 +62,7 @@ EOF help quit
 (hbnb)
 $
 
-##Tests
+## Tests
 
 unittest module
 file extension .py
