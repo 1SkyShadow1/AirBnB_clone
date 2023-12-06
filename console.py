@@ -132,4 +132,4 @@ class HBNBCommand(cmd.Cmd):
         if self.valid(arg, True):
             my_arg = arg.split()
             my_key = my_args[0]+"."+my_args[1]
-            print(storage.all()[_key])
+            print(storage.all()[my_key])
