@@ -86,7 +86,7 @@ class HBNBCommand(cmd.Cmd):
     def emptyline(self):
         """
         Does nothing
-        when empty lin  e
+        when empty line
         recieved
         """
         pass
