@@ -130,6 +130,106 @@ class HBNBCommand(cmd.Cmd):
         of an instance
         """
         if self.valid(arg, True):
-            my_arg = arg.split()
+            my_args = arg.split()
             my_key = my_args[0]+"."+my_args[1]
             print(storage.all()[my_key])
+
+    def do_update(self, arg):
+        """Updated an instanceby adding or updating attribute
+        Usage: update <class name> <id> <attribute name> \"<   attribute
+        value>\"\n"""
+        if self.valid(arg, True, True):
+            my_args = arg.split()
+            my_key = my_args[0]+"."+my_args[1]
+            if my_args[3].startswith('"'):
+                match = re.search(r'"([^"]+)"', arg).group(1)
+            elif my_args[3].stratswith("'"):
+                match = re.search(r'\'([^\']+)\'', arg).group(1)
+            else:
+                match = my_args[3]
+                if my_args[2] in HBNBCommand.valid_string_attributes:
+                    setattr(storage.all()[my_key], my_args[2], str(match))
+                elif my_args[2] in HBNBCommand.valid_int_attribute:
+                    setattr(storage.all()[my_key], my_args[2], int(match))
+                elif my_args[2] in HBNBCommand.valid_float_attributes:
+                    setattr(storage.all()[my_key], my_args[2], float(match))
+                else:
+                    setattr(storage.all()[my_key], my_args[2],
+                            self.casting(match))
+                storage.save()
+
+    def do_all(self, arg):
+        """Prints all string represantation of all
+        instances based or not on the class name
+        Usage1: all
+        Usage2: all <class name>\n"""
+        my_args = arg.split()
+        _len = len(my_args)
+        my_list = []
+        if _len >= 1:
+            if my_args[0] not in HBNBCommand.valid_classes:
+                print("** class doesn't exist **")
+                return
+            for key, value in storage.all().items():
+                if my_args[0] in key:
+                    my_list.append(str(value))
+        else:
+            for key, value in storage.all().items():
+                my_list.append(str(value))
+            print(my_list)
+
+        def casting(self, arg):
+            """ cast string to float or int if possible"""
+            try:
+                if "." in arg:
+                    arg = float(arg)
+                else:
+                    arg = int(arg)
+            expect ValueError:
+                pass
+            return arg
+
+    def _exec(self, arg):
+        """helper function parsing filtring replacing"""
+        methods = {
+                "all": self.do_all,
+                "count": self.count,
+                "show": self.do_show,
+                "destroy": self.do_destroy,
+                "update": self.do_update,
+                "create": self.do_create
+        }
+        match = re.findall(r"^(\w+)\.(\w+)\((.*)\)", arg)
+        my_args = match[0][0]+" "+match[0][2]
+        _list = my_args.split(", ")
+        _list[0] = _list[0].replace('"', "").replace("'" "")
+        if len(_list) > 1:
+            _list[1] = _list[1].replace('"', "").replace("'", "")
+        my_args = " ".join(_list)
+        if match[0][1] in methods:
+            methods[match[0][1]](my_args)
+
+    def count(self, arg):
+        """the number of instances of a class
+        Usage: <class name>.count()\n"""
+        count = 0
+        for key in storage.all():
+            if arg[:-1] in key:
+                count += 1
+                print(count)
+
+    def default(self, arg):
+        """default if there no command found"""
+        match = re.findall(r"^(\w+)\.(\w+)\((.*)\)", arg)
+        if len(match) != 0 and match[0][1] == "update" and "{" in arg:
+            _dict = re.search(r'{([^}]+)}', arg).group()
+            _dict = json.loads(_dict.replace("'" '"'))
+            for k, v in _dict.items():
+                _arg = arg.split("{")[0]+k+", "+str(v)+")"
+                self._exec(_arg)
+            elif len(match) != 0:
+                self._exec(arg)
+
+
+if __name__ == "__main__":
+    HBNBCommand().cmdloop()
