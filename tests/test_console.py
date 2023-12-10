@@ -12,9 +12,10 @@ from models.amenity import Amenity
 import json
 from io import StringIO
 
+
 class TestHBNBCommand_prompt(unittest.TestCase):
     """
-    Tests for the HBNB 
+    Tests for the HBNB
     command prompt
     """
 
@@ -26,6 +27,7 @@ class TestHBNBCommand_prompt(unittest.TestCase):
             self.assertFalse(HBNBCommand().onecmd(""))
             self.assertEqual("", my_output.getvalue().strip())
 
+
 class TestHBNBCommandHelp(unittest.TestCase):
     """
     Tests for help message in HBNB
@@ -33,14 +35,17 @@ class TestHBNBCommandHelp(unittest.TestCase):
     def test_help(self):
         expected_output = ("Documented commands (type help <topic>):\n"
                            "=======================================\n"
-                           "EOF all clear create destroy help quit show update")
+                           "EOF all clear create destroy"
+                           "help quit show update")
         with patch("sys.stdout", new=StringIO()) as my_output:
             self.assertFalse(self.cmd_instance.onecmd("help"))
             self.assertEqual(expected_output, my_output.getvalue().strip())
 
     def test_help_commmand(self, command, expected_output):
         with patch("sys.stdout", new=StringIO()) as my_output:
-            self.assertFalse(self.cmd_instance.onecmd("help {}".format(command)))
+            self.assertFalse(
+                self.cmd_instance.onecmd("help {}".format(command))
+            )
             self.assertEqual(expectes_output, my_output.getvalue().strip())
 
     def test_help_quit(self):
@@ -57,7 +62,7 @@ class TestHBNBCommandHelp(unittest.TestCase):
 
     def test_help_create(self):
         expected_output = ("Creates a new instance :\n"
-                           "Usabe: create <class name>")
+                           "Usage: create <class name>")
         with patch("sys.stdout", new=StringIO()) as my_output:
             self.assertFalse(HBNBCommand().onecmd("help create"))
             self.assertEqual(expected_output, my_output.getvalue().strip())
@@ -86,8 +91,10 @@ class TestHBNBCommandHelp(unittest.TestCase):
             self.assertEqual(expected_output, my_output.getvalue().strip())
 
     def test_help_update(self):
-        expected_output = ("Updates an instance by adding or updating attribute\n"
-                           "Usage: update <class name> <id> <attribute name> \"<attribute value>\"")
+        expected_output = ("Updates an instance by"
+                           "adding or updating attribute\n"
+                           "Usage: update <class name> <id>"
+                           "<attribute name> <attribute value>")
         with patch("sys.stdout", new=StringIO()) as my_output:
             self.assertFalse(HBNBCommand().onecmd("help update"))
             self.assertEqual(expected_output, my_output.getvalye().stript())
@@ -109,4 +116,3 @@ class ConsoleTest(unittest.TestCase):
         com_classname = ["create", "update", "show", "destroy"]
         com_id = ["update", "show", "destroy"]
         com_attr = ["update"]
-
