@@ -65,24 +65,24 @@ class TestHBNBCommandHelp(unittest.TestCase):
             self.assertEqual(expected_output, my_output.getvalue().strip())
 
     def test_help_show(self):
-        expected_output = ("Print the string representation of an instance\n"
+        expected_output = ("Prints the string representation of an instance\n"
                            "Usage: show <class name> <id>")
         with patch("sys.stdout", new=StringIO()) as my_output:
-            self.assertFalse(HBNBCommand().onecmd("help show:"))
+            self.assertFalse(HBNBCommand().onecmd("help show"))
             self.assertEqual(expected_output, my_output.getvalue().strip())
 
     def test_help_all(self):
-        expected_output = ("Prints all string representation of all "
+        expected_output = ("Prints all string representation of all\n"
                            "instances based or not on the class name\n"
                            "Usage1: all\n"
                            "Usage2: all <class name>")
         with patch("sys.stdout", new=StringIO()) as my_output:
-            self.assertFalse(HBNBCommand().onecmd("help All"))
+            self.assertFalse(HBNBCommand().onecmd("help all"))
             self.assertEqual(expected_output, my_output.getvalue().strip())
 
     def test_help_update(self):
         expected_output = ("Updates an instance by adding or updating attribute\n"
-                           "Usage: update <class name> <id> <attribute name> \"<attribute value>\"")
+                "Usage: update <class name> <id> <attribute name> \"<attribute value>\"")
         with patch("sys.stdout", new=StringIO()) as my_output:
             self.assertFalse(HBNBCommand().onecmd("help update"))
             self.assertEqual(expected_output, my_output.getvalue().strip())

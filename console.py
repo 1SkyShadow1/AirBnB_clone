@@ -123,19 +123,16 @@ class HBNBCommand(cmd.Cmd):
         print("** Data has been cleared! **")
 
     def do_show(self, arg):
-        """
-        Prints the string representation of an instance
-Usage: show <class name> <id>\n
-        """
+        """Prints the string representation of an instance
+Usage: show <class name> <id>"""
         if self.valid(arg, True):
             my_args = arg.split()
             my_key = my_args[0]+"."+my_args[1]
             print(storage.all()[my_key])
 
     def do_update(self, arg):
-        """
-        Updates an instance by adding or updating attribute
-        Usage: update <class name> <id> <attribute name> \"<attribute value>\"
+        """Updates an instance by adding or updating attribute
+Usage: update <class name> <id> <attribute name> \"<attribute value>\"
         """
         if self.valid(arg, True, True):
             my_args = arg.split()
@@ -159,9 +156,9 @@ Usage: show <class name> <id>\n
 
     def do_all(self, arg):
         """Prints all string representation of all
-        instances based or not on the class name
-        Usage1: all
-        Usage2: all <class name>\n"""
+instances based or not on the class name
+Usage1: all
+Usage2: all <class name>\n"""
         my_args = arg.split()
         _len = len(my_args)
         my_list = []
