@@ -40,7 +40,7 @@ class HBNBCommand(cmd.Cmd):
 
     def do_create(self, arg):
         """
-        Create new instance
+        Creates a new instance
         """
         av_classes = {
             "BaseModel": BaseModel,
@@ -93,15 +93,13 @@ class HBNBCommand(cmd.Cmd):
 
     def do_EOF(self, arg):
         """
-        Enables
-        ctrl-d to exit
-        program
+        Ctrl-D to exit the program
         """
         return (True)
 
     def do_quit(self, arg):
         """
-        Exits the program
+        Quit command to exit the program
         """
         return (True)
 
@@ -126,8 +124,8 @@ class HBNBCommand(cmd.Cmd):
 
     def do_show(self, arg):
         """
-        prints the string form
-        of an instance
+        Prints the string representation of an instance
+Usage: show <class name> <id>\n
         """
         if self.valid(arg, True):
             my_args = arg.split()
@@ -135,9 +133,10 @@ class HBNBCommand(cmd.Cmd):
             print(storage.all()[my_key])
 
     def do_update(self, arg):
-        """Updated an instanceby adding or updating attribute
-        Usage: update <class name> <id> <attribute name> \"<   attribute
-        value>\"\n"""
+        """
+        Updates an instance by adding or updating attribute
+        Usage: update <class name> <id> <attribute name> \"<attribute value>\"
+        """
         if self.valid(arg, True, True):
             my_args = arg.split()
             my_key = my_args[0]+"."+my_args[1]
@@ -159,7 +158,7 @@ class HBNBCommand(cmd.Cmd):
                 storage.save()
 
     def do_all(self, arg):
-        """Prints all string represantation of all
+        """Prints all string representation of all
         instances based or not on the class name
         Usage1: all
         Usage2: all <class name>\n"""
