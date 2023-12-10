@@ -3,7 +3,7 @@
 """
 import json
 import os
-from models.base_moedel import Basemodel
+from models.base_model import BaseModel
 from models.user import User
 from models.place import Place
 from models.state import State

@@ -72,7 +72,7 @@ class HBNBCommand(cmd.Cmd):
         elif args_len < 2 and my_id:
             print("** instance id missing **")
             return (False)
-        elif my_id and my_args[0]+"."my_args[1] not in storage.all():
+        elif my_id and my_args[0]+"."+my_args[1] not in storage.all():
             print("** no instance found **")
             return (False)
         elif args_len == 2 and my_attr:
@@ -185,7 +185,7 @@ class HBNBCommand(cmd.Cmd):
                     arg = float(arg)
                 else:
                     arg = int(arg)
-            expect ValueError:
+            except ValueError:
                 pass
             return arg
 
@@ -227,8 +227,8 @@ class HBNBCommand(cmd.Cmd):
             for k, v in _dict.items():
                 _arg = arg.split("{")[0]+k+", "+str(v)+")"
                 self._exec(_arg)
-            elif len(match) != 0:
-                self._exec(arg)
+        elif len(match) != 0:
+            self._exec(arg)
 
 
 if __name__ == "__main__":
