@@ -54,8 +54,9 @@ class HBNBCommand(cmd.Cmd):
         if self.valid_arg(arg):
             my_args = arg.split()
             if arg[0] in av_classes:
-                storage.save()
-                print(av_classes[args[0]]().id)
+                instance = av_classes[args[0]]()
+            storage.save()
+            print(inatance.id)
 
     def valid_arg(self, arg, my_id=False, my_attr=False):
         """
