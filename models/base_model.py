@@ -36,18 +36,18 @@ class BaseModel:
         return "[{}] [{}] [{}]".format(
                 self.__class__.__name__, self.id, self.__dict__)
 
-        def save(self):
-            """update the public instance updated_at"""
+    def save(self):
+        """update the public instance updated_at"""
         self.updated_at = datetime.now()
         models.storage.save()
 
-        def to_dict(self) -> dict:
-            """returns the dictionary
-            representation of the instance"""
-            to_dict = dict(self.__dict__)
-            to_dict["__class__"] = self.__class__.__name__
-            if not isinstance(to_dict["created_at"], str):
-                to_dict["created_at"] = to_dict["created_at"].isoformat()
-            if not isinstance(to_dict["updated_at"], str):
-                to_dict["updated_at"] = to_dict["updated_at"].isoformat()
+    def to_dict(self) -> dict:
+    """returns the dictionary
+    representation of the instance"""
+    to_dict = dict(self.__dict__)
+    to_dict["__class__"] = self.__class__.__name__
+    if not isinstance(to_dict["created_at"], str):
+        to_dict["created_at"] = to_dict["created_at"].isoformat()
+        if not isinstance(to_dict["updated_at"], str):
+            to_dict["updated_at"] = to_dict["updated_at"].isoformat()
             return to_dict
