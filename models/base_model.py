@@ -49,5 +49,5 @@ class BaseModel:
             if not isinstance(to_dict["created_at"], str):
                 to_dict["created_at"] = to_dict["created_at"].isoformat()
             if not isinstance(to_dict["updated_at"], str):
-                to_dict["updated_at"] = to_dict["updated_at"], isoformat()
+                to_dict["updated_at"] = to_dict["updated_at"].isoformat()
             return to_dict

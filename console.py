@@ -51,7 +51,7 @@ class HBNBCommand(cmd.Cmd):
             "Amenity": Amenity,
             "Review": Review
                 }
-        if self.valid(arg):
+        if self.valid_arg(arg):
             my_args = arg.split()
             if arg[0] in av_classes:
                 storage.save()
@@ -107,7 +107,7 @@ class HBNBCommand(cmd.Cmd):
         """
         Deletes any instance
         """
-        if self.valid(arg, True):
+        if self.valid_arg(arg, True):
             my_args = arg.split()
             my_key = my_args[0]+"."+my_args[1]
             del storage.all()[my_key]
@@ -125,7 +125,7 @@ class HBNBCommand(cmd.Cmd):
     def do_show(self, arg):
         """Prints the string representation of an instance
 Usage: show <class name> <id>"""
-        if self.valid(arg, True):
+        if self.valid_arg(arg, True):
             my_args = arg.split()
             my_key = my_args[0]+"."+my_args[1]
             print(storage.all()[my_key])
@@ -134,7 +134,7 @@ Usage: show <class name> <id>"""
         """Updates an instance by adding or updating attribute
 Usage: update <class name> <id> <attribute name> \"<attribute value>\"
         """
-        if self.valid(arg, True, True):
+        if self.valid_arg(arg, True, True):
             my_args = arg.split()
             my_key = my_args[0]+"."+my_args[1]
             if my_args[3].startswith('"'):
