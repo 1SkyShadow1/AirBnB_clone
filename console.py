@@ -174,16 +174,16 @@ Usage2: all <class name>\n"""
                 my_list.append(str(value))
             print(my_list)
 
-        def casting(self, arg):
-            """ cast string to float or int if possible"""
-            try:
-                if "." in arg:
-                    arg = float(arg)
-                else:
-                    arg = int(arg)
-            except ValueError:
-                pass
-            return arg
+    def casting(self, arg):
+        """ cast string to float or int if possible"""
+        try:
+            if "." in arg:
+                arg = float(arg)
+            else:
+                arg = int(arg)
+        except ValueError:
+            pass
+        return arg
 
     def _exec(self, arg):
         """helper function parsing filtring replacing"""
