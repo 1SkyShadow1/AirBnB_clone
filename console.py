@@ -50,13 +50,13 @@ class HBNBCommand(cmd.Cmd):
             "City": City,
             "Amenity": Amenity,
             "Review": Review
-                }
+        }
         if self.valid_arg(arg):
             my_args = arg.split()
-            if arg[0] in av_classes:
-                instance = av_classes[args[0]]()
-            storage.save()
-            print(inatance.id)
+            if my_args[0] in av_classes:
+                instance  =  av_classes[my_args[0]]()
+                storage.save()
+                print(instance.id)
 
     def valid_arg(self, arg, my_id=False, my_attr=False):
         """
