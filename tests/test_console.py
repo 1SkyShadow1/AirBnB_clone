@@ -65,29 +65,24 @@ class TestHBNBCommandHelp(unittest.TestCase):
             self.assertEqual(expected_output, my_output.getvalue().strip())
 
     def test_help_show(self):
-<<<<<<< HEAD
         expected_output = ("Print the string representation of an instance\n"
                 "Usage: show <class name> <id>")
-=======
+
         expected_output = ("Prints the string representation of an instance\n"
                            "Usage: show <class name> <id>")
->>>>>>> 42e05ed291423046b9a51da6cfe74293a6b2f675
         with patch("sys.stdout", new=StringIO()) as my_output:
             self.assertFalse(HBNBCommand().onecmd("help show"))
             self.assertEqual(expected_output, my_output.getvalue().strip())
 
     def test_help_all(self):
-<<<<<<< HEAD
         expected_output = ("Prints all string representation of all "
                 "instances based or not on the class name\n"
                 "Usage1: all\n"
                 "Usage2: all <class name>")
-=======
         expected_output = ("Prints all string representation of all\n"
                            "instances based or not on the class name\n"
                            "Usage1: all\n"
                            "Usage2: all <class name>")
->>>>>>> 42e05ed291423046b9a51da6cfe74293a6b2f675
         with patch("sys.stdout", new=StringIO()) as my_output:
             self.assertFalse(HBNBCommand().onecmd("help all"))
             self.assertEqual(expected_output, my_output.getvalue().strip())
