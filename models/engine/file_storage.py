@@ -1,5 +1,6 @@
 #!/usr/bin/python3
 """
+File storage class
 """
 import json
 import os
@@ -14,6 +15,7 @@ from models.review import Review
 
 class FileStorage:
     """
+    Respresentation of file storage 
     """
     __file_path = "file.json"
     __objects = {}

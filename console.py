@@ -199,7 +199,7 @@ Usage2: all <class name>\n"""
         match = re.findall(r"^(\w+)\.(\w+)\((.*)\)", arg)
         my_args = match[0][0]+" "+match[0][2]
         _list = my_args.split(", ")
-        _list[0] = _list[0].replace('"', "").replace("'" "")
+        _list[0] = _list[0].replace('"', "").replace("'", "")
         if len(_list) > 1:
             _list[1] = _list[1].replace('"', "").replace("'", "")
         my_args = " ".join(_list)
