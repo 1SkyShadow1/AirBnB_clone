@@ -121,7 +121,7 @@ class HBNBCommand(cmd.Cmd):
         """
         storage.all().clear()
         self.do_all(arg)
-        print("** Data has been cleared! **")
+        print("** All data been clear! **")
 
     def do_show(self, arg):
         """Prints the string representation of an instance
