@@ -33,7 +33,7 @@ class FileStorage:
         """
         object_dict = obj.to_dict()
         object_id = object_dict["id"]
-        class_name = object_dict()["__class__"]
+        class_name = object_dict["__class__"]
         key_name = "{}.{}".format(class_name, object_id)
         FileStorage.__objects[key_name] = obj
 
