@@ -15,7 +15,7 @@ from models.review import Review
 
 class FileStorage:
     """
-    Respresentation of file storage 
+    Respresentation of file storage
     """
     __file_path = "file.json"
     __objects = {}
@@ -31,10 +31,9 @@ class FileStorage:
         to __objects
         with a key in form <class name>.id
         """
-        object_dict = obj.to_dict()
-        object_id = object_dict["id"]
-        class_name = object_dict["__class__"]
-        key_name = "{}.{}".format(class_name, object_id)
+        object_id = obj.to_dict()["id"]
+        class_name = obj.to_dict()["__class__"]
+        key_name = class_name+"."+object_id
         FileStorage.__objects[key_name] = obj
 
     def save(self):
