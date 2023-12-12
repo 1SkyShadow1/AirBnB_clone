@@ -37,8 +37,7 @@ class TestHBNBCommandHelp(unittest.TestCase):
         expected_output = (
                 "Documented commands (type help <topic>):\n"
                 "========================================\n"
-                "EOF  all  clear  create  destroy  help "
-                "quit  show  update")
+                "EOF  all  clear  create  destroy  help  quit  show  update")
         with patch("sys.stdout", new=StringIO()) as my_output:
             self.assertFalse(HBNBCommand().onecmd("help"))
             self.assertEqual(expected_output, my_output.getvalue().strip())
@@ -76,8 +75,7 @@ class TestHBNBCommandHelp(unittest.TestCase):
 
     def test_help_all(self):
         expected_output = (
-                "Prints all string representation of all "
-                "instances based or not on the class name")
+                "Prints all string representation of all")
         with patch("sys.stdout", new=StringIO()) as my_output:
             self.assertFalse(HBNBCommand().onecmd("help all"))
             self.assertEqual(expected_output, my_output.getvalue().strip())
