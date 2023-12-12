@@ -54,7 +54,7 @@ class HBNBCommand(cmd.Cmd):
         if self.valid_arg(arg):
             my_args = arg.split()
             if my_args[0] in av_classes:
-                instance  =  av_classes[my_args[0]]()
+                instance = av_classes[my_args[0]]()
                 storage.save()
                 print(instance.id)
 
@@ -187,7 +187,7 @@ class HBNBCommand(cmd.Cmd):
         return arg
 
     def _exec(self, arg):
-        """helper function parsing filtring replacing"""
+        """Helper function parsing filtering replacing"""
         methods = {
                 "all": self.do_all,
                 "count": self.count,
@@ -207,7 +207,7 @@ class HBNBCommand(cmd.Cmd):
             methods[match[0][1]](my_args)
 
     def count(self, arg):
-        """the number of instances of a class
+        """The number of instances of a class
         Usage: <class name>.count()\n"""
         count = 0
         for key in storage.all():
@@ -216,7 +216,7 @@ class HBNBCommand(cmd.Cmd):
                 print(count)
 
     def default(self, arg):
-        """default if there no command found"""
+        """Default if there no command found"""
         match = re.findall(r"^(\w+)\.(\w+)\((.*)\)", arg)
         if len(match) != 0 and match[0][1] == "update" and "{" in arg:
             _dict = re.search(r'{([^}]+)}', arg).group()
