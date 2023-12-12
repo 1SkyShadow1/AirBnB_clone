@@ -37,8 +37,8 @@ class TestHBNBCommandHelp(unittest.TestCase):
         expected_output = (
                 "Documented commands (type help <topic>):\n"
                 "========================================\n"
-                "EOF  all  clear  create  destroy  help
-                quit  show  update")
+                "EOF  all  clear  create  destroy  help"
+                "quit  show  update")
         with patch("sys.stdout", new=StringIO()) as my_output:
             self.assertFalse(HBNBCommand().onecmd("help"))
             self.assertEqual(expected_output, my_output.getvalue().strip())
@@ -175,15 +175,15 @@ class ConsoleTest(unittest.TestCase):
             self.assertFalse(HBNBCommand().onecmd("create State"))
             Key = "State.{}".format(output.getvalue().strip())
             self.assertIn(Key, storage.all().keys())
-        with patch("sys.stdout", newStringIO()) as output:
-            self.assertFals(HBNBCommand().onecmd("create City"))
+        with patch("sys.stdout", new=StringIO()) as output:
+            self.assertFalse(HBNBCommand().onecmd("create City"))
             Key = "City.{}".format(output.getvalue().strip())
             self.assertIn(Key, storage.all().keys())
         with patch("sys.stdout", new=StringIO()) as output:
-            selfassertFalse(HBNBCommand).onecmd("create Place")
+            self.assertFalse(HBNBCommand().onecmd("create Place")
             Key = "Place.{}".format(output.getvalue().strip())
             self.assetIn(Key, storage.all().keys())
-        with patch("sys.stdout", newStringIO()) as output:
+        with patch("sys.stdout", new=StringIO()) as output:
             self.assertFalse(HBNBCommand().onecmd("create Amenity"))
             Key = "Amenity.{}".format(output.getvalue().strip())
             self.assertIn(Key, storage.all().keys())
