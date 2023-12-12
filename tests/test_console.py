@@ -34,9 +34,11 @@ class TestHBNBCommandHelp(unittest.TestCase):
     Tests for help message in HBNB
     """
     def test_help(self):
-        expected_output = ("Documented commands (type help <topic>):\n"
-                           "========================================\n"
-                        "EOF  all  clear  create  destroy  help  quit  show  update")
+        expected_output = (
+                "Documented commands (type help <topic>):\n"
+                "========================================\n"
+                "EOF  all  clear  create  destroy  help
+                quit  show  update")
         with patch("sys.stdout", new=StringIO()) as my_output:
             self.assertFalse(HBNBCommand().onecmd("help"))
             self.assertEqual(expected_output, my_output.getvalue().strip())
@@ -66,21 +68,25 @@ class TestHBNBCommandHelp(unittest.TestCase):
             self.assertEqual(expected_output, my_output.getvalue().strip())
 
     def test_help_show(self):
-        expected_output = ("Print the string representation of an instance\n"
+        expected_output = (
+                "Print the string representation of an instance\n"
                 "Usage: show <class name> <id>")
 
-        expected_output = ("Prints the string representation of an instance\n"
+        expected_output = (
+                "Prints the string representation of an instance\n"
                 "Usage: show <class name> <id>")
         with patch("sys.stdout", new=StringIO()) as my_output:
             self.assertFalse(HBNBCommand().onecmd("help show"))
             self.assertEqual(expected_output, my_output.getvalue().strip())
 
     def test_help_all(self):
-        expected_output = ("Prints all string representation of all "
+        expected_output = (
+                "Prints all string representation of all "
                 "instances based or not on the class name\n"
                 "Usage1: all\n"
                 "Usage2: all <class name>")
-        expected_output = ("Prints all string representation of all\n"
+        expected_output = (
+                "Prints all string representation of all\n"
                 "instances based or not on the class name\n"
                 "Usage1: all\n"
                 "Usage2: all <class name>")
@@ -89,8 +95,8 @@ class TestHBNBCommandHelp(unittest.TestCase):
             self.assertEqual(expected_output, my_output.getvalue().strip())
 
     def test_help_update(self):
-        expected_output = ("Updates an instance by adding or updating attribute\n"
-                "Usage: update <class name> <id> <attribute name> \"<attribute value>\"")
+        expected_output = (
+                "Updates an instance by adding or updating attribute\n")
         with patch("sys.stdout", new=StringIO()) as my_output:
             self.assertFalse(HBNBCommand().onecmd("help update"))
             self.assertEqual(expected_output, my_output.getvalue().strip())
@@ -123,7 +129,7 @@ class ConsoleTest(unittest.TestCase):
 
                 """class doesn't exist"""
                 class_dont_exist = ["create x", "update x",
-                        "show x", "destroy x", "all x"]
+                                    "show x", "destroy x", "all x"]
                 for com in class_dont_exist:
                     # print(f"class doesn't exist : {com}")
                     with patch('sys.stdout', new=StringIO()) as f:
@@ -140,7 +146,8 @@ class ConsoleTest(unittest.TestCase):
                         with patch('sys.stdout', new=StringIO()) as f:
                             expected = "** instance id missing **"
                             HBNBCommand().onecmd(f"{cmd} {clas}")
-                            self.assertCountEqual(expected, f.getvalue().strip())
+                            self.assertCountEqual(
+                                    expected, f.getvalue().strip())
                 """ no instance found"""
                 cmds = ["update", "show", "destroy"]
                 all_class = HBNBCommand().valid_classes
@@ -151,7 +158,8 @@ class ConsoleTest(unittest.TestCase):
                         with patch('sys.stdout', new=StringIO()) as f:
                             expected = "** no instance found **"
                             HBNBCommand().onecmd(f"{cmd} {clas} {wrong_id}")
-                            self.assertCountEqual(expected, f.getvalue().strip())
+                            self.assertCountEqual(
+                                    expected, f.getvalue().strip())
 
     def test_create_object(self):
         """ testing for create """
@@ -195,20 +203,24 @@ class ConsoleTest(unittest.TestCase):
             id_User = new_User.id
             id_State = new_State.id
             id_City = new_City.id
-            id_Amenity = new=Amenity.id
+            id_Amenity = new_Amenity.id
             id_Place = new_Place.id
             id_Review = new_Review.id
-            id_dict = {"BaseModel": id_BaseModel, "User": id_User, "State": id_State, "City": id_City, "Amenity": id_Amenity, "Place": id_Place, "Review": id_Review}
+            id_dict = {
+                    "BaseModel": id_BaseModel, "User": id_User,
+                    "State": id_State, "City": id_City, "Amenity": id_Amenity,
+                    "Place": id_Place, "Review": id_Review
+                    }
             cmds = ["update"]
             all_class = HBNBCommand().all_class
             for cmd in cmds:
                 for clas in all_class:
-                    #print(f"no instance found : {cmd} {clas} {wrong_id}")
-                    #print(f"{cmd} {clas} {id_dict[clas]}")
                     with patch('sys.stdout', new=StringIO()) as f:
                         expected = "** value missing **"
-                        HBNBCommand().onecmd(f"{cmd} {clas} {id_dict[clas]} name")
+                        HBNBCommand().onecmd(
+                                f"{cmd} {clas} {id_dict[clas]} name")
                         self.assertCountEqual(expected, f.getvalue().strip())
+
 
 if __name__ == '__main__':
     unittest.main()
