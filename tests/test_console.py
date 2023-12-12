@@ -37,7 +37,7 @@ class TestHBNBCommandHelp(unittest.TestCase):
         expected_output = (
                 "Documented commands (type help <topic>):\n"
                 "========================================\n"
-                "EOF  all  clear  create  destroy  help"
+                "EOF  all  clear  create  destroy  help "
                 "quit  show  update")
         with patch("sys.stdout", new=StringIO()) as my_output:
             self.assertFalse(HBNBCommand().onecmd("help"))
@@ -69,12 +69,7 @@ class TestHBNBCommandHelp(unittest.TestCase):
 
     def test_help_show(self):
         expected_output = (
-                "Print the string representation of an instance\n"
-                "Usage: show <class name> <id>")
-
-        expected_output = (
-                "Prints the string representation of an instance\n"
-                "Usage: show <class name> <id>")
+                "Prints the string representation of an instance")
         with patch("sys.stdout", new=StringIO()) as my_output:
             self.assertFalse(HBNBCommand().onecmd("help show"))
             self.assertEqual(expected_output, my_output.getvalue().strip())
@@ -82,21 +77,14 @@ class TestHBNBCommandHelp(unittest.TestCase):
     def test_help_all(self):
         expected_output = (
                 "Prints all string representation of all "
-                "instances based or not on the class name\n"
-                "Usage1: all\n"
-                "Usage2: all <class name>")
-        expected_output = (
-                "Prints all string representation of all\n"
-                "instances based or not on the class name\n"
-                "Usage1: all\n"
-                "Usage2: all <class name>")
+                "instances based or not on the class name")
         with patch("sys.stdout", new=StringIO()) as my_output:
             self.assertFalse(HBNBCommand().onecmd("help all"))
             self.assertEqual(expected_output, my_output.getvalue().strip())
 
     def test_help_update(self):
         expected_output = (
-                "Updates an instance by adding or updating attribute\n")
+                "Updates an instance by adding or updating attribute")
         with patch("sys.stdout", new=StringIO()) as my_output:
             self.assertFalse(HBNBCommand().onecmd("help update"))
             self.assertEqual(expected_output, my_output.getvalue().strip())
@@ -180,15 +168,15 @@ class ConsoleTest(unittest.TestCase):
             Key = "City.{}".format(output.getvalue().strip())
             self.assertIn(Key, storage.all().keys())
         with patch("sys.stdout", new=StringIO()) as output:
-            self.assertFalse(HBNBCommand().onecmd("create Place")
+            self.assertFalse(HBNBCommand().onecmd("create Place"))
             Key = "Place.{}".format(output.getvalue().strip())
-            self.assetIn(Key, storage.all().keys())
+            self.assertIn(Key, storage.all().keys())
         with patch("sys.stdout", new=StringIO()) as output:
             self.assertFalse(HBNBCommand().onecmd("create Amenity"))
             Key = "Amenity.{}".format(output.getvalue().strip())
             self.assertIn(Key, storage.all().keys())
-        with patch("sys.stdut", new=StringIO()) as output:
-            self.assetFalse(HBNBCommand().onecmd("create Review"))
+        with patch("sys.stdout", new=StringIO()) as output:
+            self.assertFalse(HBNBCommand().onecmd("create Review"))
             Key = "Review.{}".format(output.getvalue().strip())
             self.assertIn(Key, storage.all().keys())
             """ value missing """
@@ -212,9 +200,9 @@ class ConsoleTest(unittest.TestCase):
                     "Place": id_Place, "Review": id_Review
                     }
             cmds = ["update"]
-            all_class = HBNBCommand().all_class
+            valid_classes = HBNBCommand().valid_classes
             for cmd in cmds:
-                for clas in all_class:
+                for clas in valid_classes:
                     with patch('sys.stdout', new=StringIO()) as f:
                         expected = "** value missing **"
                         HBNBCommand().onecmd(
