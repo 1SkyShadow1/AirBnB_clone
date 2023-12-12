@@ -58,132 +58,132 @@ class HBNBCommand(cmd.Cmd):
                 storage.save()
                 print(instance.id)
 
-        def valid_arg(self, arg, my_id=False, my_attr=False):
-            """
-            Validates arguments passed
-            """
+    def valid_arg(self, arg, my_id=False, my_attr=False):
+        """
+        Validates arguments passed
+        """
+        my_args = arg.split()
+        args_len = len(arg.split())
+        if args_len == 0:
+            print("** class name missing **")
+            return (False)
+        elif my_args[0] not in HBNBCommand.valid_classes:
+            print("** class doesn't exist **")
+            return (False)
+        elif args_len < 2 and my_id:
+            print("** instance id missing **")
+            return (False)
+        elif my_id and my_args[0]+"."+my_args[1] not in storage.all():
+            print("** no instance found **")
+            return (False)
+        elif args_len == 2 and my_attr:
+            print("** attribute name missing **")
+            return (False)
+        elif args_len == 3 and my_attr:
+            print("** value missing **")
+            return (False)
+        return (True)
+
+    def emptyline(self):
+        """
+        Does nothing
+        when empty line
+        recieved
+        """
+        pass
+
+    def do_EOF(self, arg):
+        """
+        Ctrl-D to exit the program
+        """
+        return (True)
+
+    def do_quit(self, arg):
+        """
+        Quit command to exit the program
+        """
+        return (True)
+
+    def do_destroy(self, arg):
+        """
+        Deletes any instance
+        """
+        if self.valid_arg(arg, True):
             my_args = arg.split()
-            args_len = len(arg.split())
-            if args_len == 0:
-                print("** class name missing **")
-                return (False)
-            elif my_args[0] not in HBNBCommand.valid_classes:
-                print("** class doesn't exist **")
-                return (False)
-            elif args_len < 2 and my_id:
-                print("** instance id missing **")
-                return (False)
-            elif my_id and my_args[0]+"."+my_args[1] not in storage.all():
-                print("** no instance found **")
-                return (False)
-            elif args_len == 2 and my_attr:
-                print("** attribute name missing **")
-                return (False)
-            elif args_len == 3 and my_attr:
-                print("** value missing **")
-                return (False)
-            return (True)
+            my_key = my_args[0]+"."+my_args[1]
+            del storage.all()[my_key]
+            storage.save()
 
-        def emptyline(self):
-            """
-            Does nothing
-            when empty line
-            recieved
-            """
-            pass
+    def do_clear(self, arg):
+        """
+        Clears the data
+        stored
+        """
+        storage.all().clear()
+        self.do_all(arg)
+        print("** All data been clear! **")
 
-        def do_EOF(self, arg):
-            """
-            Ctrl-D to exit the program
-            """
-            return (True)
-
-        def do_quit(self, arg):
-            """
-            Quit command to exit the program
-            """
-            return (True)
-
-        def do_destroy(self, arg):
-            """
-            Deletes any instance
-            """
-            if self.valid_arg(arg, True):
-                my_args = arg.split()
-                my_key = my_args[0]+"."+my_args[1]
-                del storage.all()[my_key]
-                storage.save()
-
-        def do_clear(self, arg):
-            """
-            Clears the data
-            stored
-            """
-            storage.all().clear()
-            self.do_all(arg)
-            print("** All data been clear! **")
-
-        def do_show(self, arg):
-            """Prints the string representation of an instance
-    Usage: show <class name> <id>"""
-            if self.valid_arg(arg, True):
-                my_args = arg.split()
-                my_key = my_args[0]+"."+my_args[1]
-                print(storage.all()[my_key])
-
-        def do_update(self, arg):
-            """Updates an instance by adding or updating attribute
-    Usage: update <class name> <id> <attribute name> \"<attribute value>\"
-            """
-            if self.valid_arg(arg, True, True):
-                my_args = arg.split()
-                my_key = my_args[0]+"."+my_args[1]
-                if my_args[3].startswith('"'):
-                    match = re.search(r'"([^"]+)"', arg).group(1)
-                elif my_args[3].stratswith("'"):
-                    match = re.search(r'\'([^\']+)\'', arg).group(1)
-                else:
-                    match = my_args[3]
-                    if my_args[2] in HBNBCommand.valid_string_attributes:
-                        setattr(storage.all()[my_key], my_args[2], str(match))
-                    elif my_args[2] in HBNBCommand.valid_int_attribute:
-                        setattr(storage.all()[my_key], my_args[2], int(match))
-                    elif my_args[2] in HBNBCommand.valid_float_attributes:
-                        setattr(storage.all()[my_key], my_args[2], float(match))
-                    else:
-                        setattr(storage.all()[my_key], my_args[2],
-                                self.casting(match))
-                    storage.save()
-
-        def do_all(self, arg):
-            """Prints all string representation of all
-    instances based or not on the class name
-    Usage1: all
-    Usage2: all <class name>\n"""
+    def do_show(self, arg):
+        """Prints the string representation of an instance
+        Usage: show <class name> <id>"""
+        if self.valid_arg(arg, True):
             my_args = arg.split()
-            _len = len(my_args)
-            my_list = []
-            if _len >= 1:
-                if my_args[0] not in HBNBCommand.valid_classes:
-                    print("** class doesn't exist **")
-                    return
-                for key, value in storage.all().items():
-                    if my_args[0] in key:
-                        my_list.append(str(value))
+            my_key = my_args[0]+"."+my_args[1]
+            print(storage.all()[my_key])
+
+    def do_update(self, arg):
+        """Updates an instance by adding or updating attribute
+        Usage: update <class name> <id> <attribute name> \"<attribute value>\"
+        """
+        if self.valid_arg(arg, True, True):
+            my_args = arg.split()
+            my_key = my_args[0]+"."+my_args[1]
+            if my_args[3].startswith('"'):
+                match = re.search(r'"([^"]+)"', arg).group(1)
+            elif my_args[3].stratswith("'"):
+                match = re.search(r'\'([^\']+)\'', arg).group(1)
             else:
-                for key, value in storage.all().items():
-                    my_list.append(str(value))
-                print(my_list)
+                match = my_args[3]
+            if my_args[2] in HBNBCommand.valid_string_attributes:
+                setattr(storage.all()[my_key], my_args[2], str(match))
+            elif my_args[2] in HBNBCommand.valid_int_attributes:
+                setattr(storage.all()[my_key], my_args[2], int(match))
+            elif my_args[2] in HBNBCommand.valid_float_attributes:
+                setattr(storage.all()[my_key], my_args[2], float(match))
+            else:
+                setattr(storage.all()[my_key], my_args[2],
+                        self.casting(match))
+            storage.save()
 
-        def casting(self, arg):
-            """ cast string to float or int if possible"""
-            try:
-                if "." in arg:
-                    arg = float(arg)
-                else:
-                    arg = int(arg)
-            except ValueError:
-                pass
+    def do_all(self, arg):
+        """Prints all string representation of all
+        instances based or not on the class name
+        Usage1: all
+        Usage2: all <class name>\n"""
+        my_args = arg.split()
+        _len = len(my_args)
+        my_list = []
+        if _len >= 1:
+            if my_args[0] not in HBNBCommand.valid_classes:
+                print("** class doesn't exist **")
+                return
+            for key, value in storage.all().items():
+                if my_args[0] in key:
+                    my_list.append(str(value))
+        else:
+            for key, value in storage.all().items():
+                my_list.append(str(value))
+            print(my_list)
+
+    def casting(self, arg):
+        """ cast string to float or int if possible"""
+        try:
+            if "." in arg:
+                arg = float(arg)
+            else:
+                arg = int(arg)
+        except ValueError:
+            pass
         return arg
 
     def _exec(self, arg):
